@@ -4,7 +4,7 @@ import CardWrapper from '@/src/components/pages/productList/CardWrapper'
 
 const Products = () => {
   return (
-    <div className="w-full dark:bg-gray-900">
+    <div className="w-full bg-white dark:bg-gray-900">
       <HeroSection />
       <div className="container mx-auto px-15 py-15">
         <Suspense fallback={<div className="text-center py-10">Loading products...</div>}>

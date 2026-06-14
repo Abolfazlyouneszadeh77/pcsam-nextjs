@@ -99,7 +99,7 @@ const CardWrapper = () => {
 
   return (
     <>
-      <div className="w-full flex justify-between border-b border-gray-300 pb-2 px-2">
+      <div className="w-full flex justify-between border-b border-gray-300 pb-2 px-10">
         <div className="flex gap-3">
           <button onClick={() => setIsViewOne(true)}>
             {isViewOne ? (
