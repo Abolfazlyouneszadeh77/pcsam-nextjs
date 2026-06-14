@@ -3,6 +3,7 @@
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
+@plugin "daisyui";
 
 /* @import "leaflet/dist/leaflet.css"; */
 
