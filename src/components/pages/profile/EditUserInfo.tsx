@@ -111,14 +111,14 @@ const EditUserInfo = ({ userData, setUserData, setIsEditInfo }: any) => {
           <button
             type="button"
             onClick={() => setIsEditInfo(false)}
-            className="px-6 py-2.5 text-sm text-slate-600 dark:text-slate-300 border border-gray-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
+            className="px-6 py-2.5 text-sm text-slate-600 dark:text-slate-300 border border-gray-700 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
           >
             انصراف
           </button>
 
           <button
             type="submit"
-            className="px-6 py-2.5 text-sm bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl transition shadow-sm shadow-indigo-200"
+            className="px-6 py-2.5 text-sm bg-indigo-600 text-white hover:bg-indigo-700 rounded-xl transition"
           >
             ذخیره تغییرات
           </button>

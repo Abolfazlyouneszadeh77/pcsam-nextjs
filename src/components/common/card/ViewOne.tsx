@@ -11,6 +11,7 @@ interface CardProps {
 }
 
 const ViewOne = ({ product }: CardProps) => {
+
   return (
     <div className="w-65 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg overflow-hidden hover:shadow-blue-300 transition-shadow duration-200">
       <div className="relative">

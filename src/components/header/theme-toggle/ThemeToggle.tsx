@@ -4,49 +4,43 @@ import { GrSun } from "react-icons/gr";
 import { WiMoonAltWaningCrescent3 } from "react-icons/wi";
 
 const ThemeToggle = () => {
-  const [darkmode, setDarkmode] = useState<boolean | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [darkmode, setDarkmode] = useState(false);
 
   useEffect(() => {
-    const savedMode = localStorage.getItem("darkmode");
-
-    if (savedMode !== null) {
-      setDarkmode(JSON.parse(savedMode));
-    } else {
-      setDarkmode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+    const isDark = document.documentElement.classList.contains('dark');
+    setDarkmode(isDark);
+    setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (darkmode === null) return;
-    const html = document.documentElement;
+  const toggleTheme = ()=>{
+    const nextDarkmode = !darkmode;
+    setDarkmode(nextDarkmode);
 
-    localStorage.setItem("darkmode", JSON.stringify(darkmode));
-    if (darkmode) {
-      html.classList.add("dark"); // برای Tailwind
-      html.setAttribute("data-theme", "dark"); // برای DaisyUI
-      html.style.colorScheme = "dark"; // برای مرورگر
+    const html = document.documentElement;
+    if(nextDarkmode){
+      html.classList.add('dark');
+      html.setAttribute('data-theme', 'dark');
+      html.style.colorScheme= 'dark';
+      document.cookie = "theme=dark; path=/; max-age=31536000; samesite=lax";
     } else {
       html.classList.remove("dark");
       html.setAttribute("data-theme", "light");
       html.style.colorScheme = "light";
+      document.cookie = "theme=light; path=/; max-age=31536000; samesite=lax";
     }
-  }, [darkmode]);
+  }
 
-  if (darkmode === null) {
-    return (
-      <button
-        className="p-2 rounded-full opacity-0 pointer-events-none"
-      >
-        <GrSun size="30px" />
-      </button>
-    );
+  if (!mounted) {
+    return <div className="p-1.5 w-10 h-10" />;
   }
   
   return (
     <>
       <button
         className="p-1.5 rounded-lg hover:shadow-[0px_2px_5px_0_rgba(0,0,0,0.2)] dark:hover:bg-gray-800 transition-all ease-in-out duration-200"
-        onClick={() => setDarkmode((prev) => !prev)}
+        onClick={toggleTheme}
+        aria-label="تغییر تم"
       >
         {darkmode ? (
           <GrSun size="30px" className="dark:text-gray-300" />

@@ -58,7 +58,7 @@ const ProfilePage = () => {
             <div className="h-28 bg-linear-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
             <div className="px-6 pb-6 relative top-2">
               <div className="-mt-14 flex items-center gap-6">
-                <div className="h-24 w-24 bg-white dark:bg-gray-800 rounded-2xl shadow-md flex items-center justify-center text-3xl font-bold text-slate-700 border-2 border-white ">
+                <div className="h-24 w-24 bg-white dark:bg-gray-800 rounded-2xl shadow-md flex items-center justify-center text-3xl font-bold text-slate-700 dark:text-slate-200 border-2 border-white ">
                   {userData.name.charAt(0)}
                 </div>
                 <div className="space-y-3">
@@ -76,18 +76,18 @@ const ProfilePage = () => {
 
               <div className="mt-6 flex gap-3">
                 <button
-                  onClick={() => setIsEditInfo(true)}
-                  className="flex-1 text-blue-600 dark:text-white border py-3 rounded-xl text-sm font-medium hover:bg-blue-100 transition flex items-center justify-center gap-2"
-                >
-                  <HiPencil size={18} />
-                  {isEditInfo ? "در حال ویرایش" : "ویرایش"}
-                </button>
-                <button
                   onClick={() => handleLogout()}
-                  className="border border-red-200 text-red-600 py-3 px-4 rounded-xl text-sm font-medium hover:bg-red-50 transition flex items-center gap-2"
+                  className=" text-red-600 dark:text-white py-3 px-4 rounded-xl text-sm font-medium hover:bg-red-50 dark:hover:bg-red-950 transition flex items-center gap-2"
                 >
                   <HiArrowRightOnRectangle size={18} />
                   خروج
+                </button>
+                <button
+                  onClick={() => setIsEditInfo(true)}
+                  className="flex-1 text-blue-600 dark:text-white border py-3 rounded-xl text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900 transition flex items-center justify-center gap-2"
+                >
+                  <HiPencil size={18} />
+                  {isEditInfo ? "در حال ویرایش..." : "ویرایش"}
                 </button>
               </div>
             </div>

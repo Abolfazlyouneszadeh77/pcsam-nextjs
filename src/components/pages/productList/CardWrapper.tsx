@@ -12,11 +12,12 @@ import { useProductStore } from "@/src/store/productStore";
 import ProductTabs from "./ProductTabs";
 import { Product } from "@/src/core/constants/types";
 import { useRouter, useSearchParams } from "next/navigation";
+import CardSkeleton from "../../common/skeleton/CardSkeleton";
 
 const ITEMS_PER_PAGE = 16;
 
 const CardWrapper = () => {
-  const { productsList } = useProductStore();
+  const { productsList, isLoading } = useProductStore();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -120,21 +121,25 @@ const CardWrapper = () => {
       </div>
       <div className="w-full flex flex-col items-center">
         <div
-          className={`p-5 flex ${
+          className={`w-full p-5 ${
             isViewOne
-              ? "flex-row justify-center gap-6 flex-wrap"
-              : "w-full flex-col gap-3"
+              ? "grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-6"
+              : "flex flex-col gap-3"
           }`}
         >
-          {currentItems.map((item) => (
-            <div key={item.id}>
-              {isViewOne ? (
-                <ViewOne product={item} />
-              ) : (
-                <ViewTwo product={item} />
-              )}
-            </div>
-          ))}
+          {isLoading
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <CardSkeleton key={i} />
+              ))
+            : currentItems.map((item) => (
+                <div key={item.id}>
+                  {isViewOne ? (
+                    <ViewOne product={item} />
+                  ) : (
+                    <ViewTwo product={item} />
+                  )}
+                </div>
+              ))}
         </div>
         <Pagination
           products={filteredProducts}

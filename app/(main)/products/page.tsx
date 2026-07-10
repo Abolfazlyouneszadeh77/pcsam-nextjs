@@ -7,7 +7,7 @@ const Products = () => {
     <div className="w-full bg-white dark:bg-gray-900">
       <HeroSection />
       <div className="container mx-auto px-15 py-15">
-        <Suspense fallback={<div className="text-center py-10">Loading products...</div>}>
+        <Suspense>
           <CardWrapper />
         </Suspense>
       </div>
