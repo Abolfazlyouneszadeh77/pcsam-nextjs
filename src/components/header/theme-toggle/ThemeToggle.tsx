@@ -43,7 +43,7 @@ const ThemeToggle = () => {
         aria-label="تغییر تم"
       >
         {darkmode ? (
-          <GrSun size="30px" className="dark:text-gray-300" />
+          <GrSun size="30px" className="dark:text-gray-300 " />
         ) : (
           <WiMoonAltWaningCrescent3 size="28px" className="text-gray-700 dark:text-gray-300" />
         )}

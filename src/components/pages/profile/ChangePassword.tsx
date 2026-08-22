@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiLockClosed } from "react-icons/hi";
 import { toast } from "react-toastify";
 
-const ChangePassword = ({ userData }: any) => {
+const ChangePassword = () => {
   const [showInput, setShowInput] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -25,7 +25,7 @@ const ChangePassword = ({ userData }: any) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 transition-all ease-in-out duration-300">
+    <div className="flex flex-col gap-2">
       <div className="border border-slate-200 rounded-xl px-4 py-3">
         <div
           onClick={() => setShowInput(!showInput)}

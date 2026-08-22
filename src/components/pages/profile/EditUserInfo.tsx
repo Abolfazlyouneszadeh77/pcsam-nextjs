@@ -15,8 +15,11 @@ interface UserFormValues {
 }
 
 const EditUserInfo = ({ userData, setUserData, setIsEditInfo }: any) => {
-
-  const { register, handleSubmit, formState: { errors } } = useForm<UserFormValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserFormValues>({
     defaultValues: {
       name: userData.name,
       mobile: userData.mobile,
@@ -28,7 +31,9 @@ const EditUserInfo = ({ userData, setUserData, setIsEditInfo }: any) => {
   });
 
   const onSubmit = (data: UserFormValues) => {
-
+    const confirmed = window.confirm("آیا از ذخیره تغییرات اطمینان دارید؟");
+    if (!confirmed) return;
+    
     const storedUsers = JSON.parse(localStorage.getItem("all-users") || "[]");
     const confirmedUser = localStorage.getItem("confirmed-user");
 
@@ -47,7 +52,7 @@ const EditUserInfo = ({ userData, setUserData, setIsEditInfo }: any) => {
 
     setUserData({ ...userData, ...data });
     setIsEditInfo(false);
-    toast.success('ویرایش اطلاعات کاربری با موفقیت انجام شد.')
+    toast.success("ویرایش اطلاعات کاربری با موفقیت انجام شد.");
   };
 
   return (

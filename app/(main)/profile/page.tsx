@@ -1,9 +1,9 @@
 "use client";
 import EditUserInfo from "@/src/components/pages/profile/EditUserInfo";
+import Logout from "@/src/components/pages/profile/Logout";
 import PersonalInfo from "@/src/components/pages/profile/PersonalInfo";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { HiPencil, HiArrowRightOnRectangle } from "react-icons/hi2";
+import { HiPencil } from "react-icons/hi2";
 interface UserData {
   name: string;
   email: string;
@@ -12,7 +12,7 @@ interface UserData {
 }
 
 const ProfilePage = () => {
-  const router = useRouter();
+  
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isEditInfo, setIsEditInfo] = useState<boolean>(false);
 
@@ -34,11 +34,6 @@ const ProfilePage = () => {
       </div>
     );
   }
-
-  const handleLogout = () => {
-    document.cookie = "authToken=; path=/; max-age=0";
-    router.replace("/login");
-  };
 
   return (
     <div className="min-h-screen bg-slate-50 px-4 dark:bg-gray-900 py-8 md:px-8">
@@ -75,13 +70,7 @@ const ProfilePage = () => {
               </div>
 
               <div className="mt-6 flex gap-3">
-                <button
-                  onClick={() => handleLogout()}
-                  className=" text-red-600 dark:text-white py-3 px-4 rounded-xl text-sm font-medium hover:bg-red-50 dark:hover:bg-red-950 transition flex items-center gap-2"
-                >
-                  <HiArrowRightOnRectangle size={18} />
-                  خروج
-                </button>
+                <Logout />
                 <button
                   onClick={() => setIsEditInfo(true)}
                   className="flex-1 text-blue-600 dark:text-white border py-3 rounded-xl text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900 transition flex items-center justify-center gap-2"

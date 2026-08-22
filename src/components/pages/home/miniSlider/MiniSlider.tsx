@@ -1,8 +1,8 @@
 "use client";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
-import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -15,11 +15,11 @@ interface MiniSliderProps {
   tab: string;
 }
 
-export default function MiniSlider({
+ const MiniSlider =({
   products = defaultProducts,
-  title = "محصولات ویژه",
+  title,
   tab,
-}: MiniSliderProps) {
+}: MiniSliderProps) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -35,7 +35,7 @@ export default function MiniSlider({
           )}
           <Link
             href={`/products?tab=${tab}`}
-            className="text-blue-700 flex items-center gap-2 sm:text-[16px] text-[12px]"
+            className="text-blue-700 flex items-center gap-2 sm:text-[16px] text-[12px] hover:bg-blue-50 px-3 py-1 rounded-full"
           >
             مشاهده همه
             <IoIosArrowBack size={16} />
@@ -98,3 +98,5 @@ export default function MiniSlider({
     </div>
   );
 }
+
+export default MiniSlider

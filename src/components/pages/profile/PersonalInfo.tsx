@@ -74,7 +74,7 @@ const PersonalInfo = ({ userData }: any) => {
           <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-300 mb-4">
             امنیت حساب
           </h3>
-          <ChangePassword userData={userData}/>
+          <ChangePassword />
         </div>
       </div>
     </>

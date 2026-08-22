@@ -6,6 +6,8 @@ import { useTransition } from "react";
 const navBarData = [
   { title: "خانه", path: "/" },
   { title: "محصولات", path: "/products" },
+  { title: "درباره ما", path: "/about" },
+  { title: "تماس با ما", path: "/contact" },
 ];
 
 const HorizonalNavBar = () => {
@@ -36,7 +38,7 @@ const HorizonalNavBar = () => {
               href={item.path}
               onClick={(e) => handleClick(e, item.path)}
               className={`
-                            px-4 sm:px-5 py-2 text-gray-600 text-xs sm:text-[16px] font-semibold dark:text-white
+                            px-4 sm:px-3 py-2 text-gray-600 text-xs sm:text-[16px] font-semibold dark:text-white
                             ${
                               isActive
                                 ? "border-b-2 border-blue-800"

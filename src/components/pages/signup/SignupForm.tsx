@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
+import { BsEyeFill } from "react-icons/bs";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 interface authUserType {
   id: number;
   name: string;
@@ -13,6 +15,7 @@ interface authUserType {
 }
 
 const SignupForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,9 +26,7 @@ const SignupForm = () => {
 
   const onSubmit = (data: authUserType) => {
     // گرفتن کاربران قبلی
-    const existingUsers = JSON.parse(
-      localStorage.getItem("all-users") || "[]",
-    );
+    const existingUsers = JSON.parse(localStorage.getItem("all-users") || "[]");
 
     // بررسی تکراری نبودن نام کاربری
     const userExists = existingUsers.find(
@@ -126,18 +127,27 @@ const SignupForm = () => {
             رمز عبور
             <span className="text-red-500">*</span>
           </label>
-          <input
-            type="password"
-            {...register("password", {
-              required: "رمز عبور اجباری است!",
-              minLength: {
-                value: 6,
-                message: "رمز باید حداقل ۶ کاراکتر باشد!",
-              },
-            })}
-            className="w-full h-10 py-3 px-5  mt-1 rounded-lg placeholder:text-[14px] outline-blue-500 border-2 border-gray-300 hover:border-blue-400 dark:text-gray-300"
-            placeholder="رمز عبور خود را وارد کنید."
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password", {
+                required: "رمز عبور اجباری است!",
+                minLength: {
+                  value: 6,
+                  message: "رمز باید حداقل ۶ کاراکتر باشد!",
+                },
+              })}
+              className="w-full h-10 py-3 px-5  mt-1 rounded-lg placeholder:text-[14px] outline-blue-500 border-2 border-gray-300 hover:border-blue-400 dark:text-gray-300"
+              placeholder="رمز عبور خود را وارد کنید."
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500"
+            >
+              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+            </button>
+          </div>
           {errors?.password && (
             <span className="text-red-500 mr-5 text-[14px]">
               {errors.password.message}

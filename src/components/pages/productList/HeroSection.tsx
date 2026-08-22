@@ -1,4 +1,4 @@
-import { FiSearch } from "react-icons/fi";
+import ProductSearch from "../../common/searchProducts/ProductSearch";
 
 const HeroSection = () => {
   return (
@@ -12,19 +12,7 @@ const HeroSection = () => {
         </p>
 
         {/* Search / Filter */}
-        <div className="mt-6 max-w-md">
-          <div className="relative">
-            <FiSearch
-              className="absolute right-3 top-3 text-gray-300"
-              size={18}
-            />
-            <input
-              type="text"
-              placeholder="جستجوی محصول..."
-              className="w-full py-2.5 pr-10 rounded-lg text-gray-800 outline-none"
-            />
-          </div>
-        </div>
+        <ProductSearch />
       </div>
     </div>
   );

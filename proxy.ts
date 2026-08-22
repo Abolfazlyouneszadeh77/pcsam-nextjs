@@ -7,14 +7,14 @@ export function proxy(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === "/login";
 
   // اگر لاگین نیست و صفحه لاگین هم نیست → redirect
-  if (!authToken && !isLoginPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // if (!authToken && !isLoginPage) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
 
   // اگر لاگین هست و میره صفحه لاگین → redirect به home
-  if (authToken && isLoginPage) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (authToken && isLoginPage) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   return NextResponse.next();
 }
