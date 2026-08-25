@@ -6,7 +6,7 @@ import ScrollToTop from '@/src/components/common/scrollToTop'
 const Products = () => {
   return (
     <div className="w-full bg-white dark:bg-gray-900 relative">
-      <HeroSection />
+      {/* <HeroSection /> */}
       <div className="container mx-auto px-15 py-15">
         <Suspense>
           <CardWrapper />

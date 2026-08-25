@@ -5,10 +5,10 @@ import VerticalNavbar from './VerticalNavbar'
 const Navbar = () => {
   return (
     <>
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <HorizonalNavbar />
       </div>
-      <div className="block md:hidden">
+      <div className="block lg:hidden">
         <VerticalNavbar />
       </div>
     </>

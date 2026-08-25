@@ -1,14 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import cat1 from "@/public/products/IdeaPad 1 15IJL7 با پردازنده Celeron N4500/5027d6613f904bf581d977a957a7ea2b8e78e960_1737450812.webp";
+import laptop from "@/public/products/3jYtBGH-xODCdXAXoUbULyIAAeY-kbp1AUb3QY-kYTQQxoJFSQ.png";
+import cat1 from "@/public/products/nUFroQy67xDmdNK1zVTg73PHUHE-UVGwYPi6TQSyBve40-c_Gg.png";
+import monitor from "@/public/products/2KhbUgH6TKhHZaJrLyfcHIvvXsU-2E29xu4xQa6vG-W7cBJ5ZA.png";
 
 const categories = [
-  { title: "لپتاپ", picture: cat1 },
+  { title: "لپتاپ", picture: laptop },
   { title: "لوازم جانبی", picture: cat1 },
-  { title: "مانیتور", picture: cat1 },
+  { title: "مانیتور", picture: monitor },
   { title: "لپتاپ", picture: cat1 },
-  { title: "لپتاپ", picture: cat1 },
+  { title: "لپتاپ", picture: laptop },
 ];
 
 const Categories = () => {
@@ -19,7 +21,7 @@ const Categories = () => {
           <div key={index} className="p-2 text-center">
             <Link
               href="/"
-              className="flex size-30 items-center justify-center overflow-hidden rounded-3xl p-3 transition-all duration-100 ease-in-out hover:shadow-[0_2px_10px_rgba(0,0,0,0.1)] shadow-blue-300"
+              className="flex size-25 items-center justify-center overflow-hidden p-1 rounded-3xl transition-all duration-100 ease-in-out hover:shadow-[0_2px_10px_rgba(0,0,0,0.1)] shadow-blue-300"
             >
               <Image
                 src={item.picture}

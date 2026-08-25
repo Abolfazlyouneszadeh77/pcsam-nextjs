@@ -4,6 +4,7 @@ import ThemeToggle from "../components/header/theme-toggle/ThemeToggle";
 import ProfileBtn from "../components/header/profile-botton/ProfileBtn";
 import BasketButton from "../components/header/basketButton/BasketButton";
 import Logo from "../components/common/logo/Logo";
+import ProductSearch from "../components/common/searchProducts/ProductSearch";
 
 const Header = () => {
   return (
@@ -17,6 +18,7 @@ const Header = () => {
           <Logo />
         </div>
         <div className="flex items-center gap-5">
+          <ProductSearch />
           <ThemeToggle />
           <BasketButton />
           <ProfileBtn />

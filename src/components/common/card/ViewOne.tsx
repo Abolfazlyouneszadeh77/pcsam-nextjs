@@ -11,15 +11,16 @@ interface CardProps {
 }
 
 const ViewOne = ({ product }: CardProps) => {
-
   return (
     <div className="w-65 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg overflow-hidden hover:shadow-blue-300 transition-shadow duration-200">
       <div className="relative">
         <Image src={productImage} alt={product.title} className="rounded-lg" />
-        {product.discount && (
+        {product.discount ? (
           <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-bold pt-2">
             {product.discount}%
           </div>
+        ) : (
+          <></>
         )}
       </div>
       <div className="space-y-2">
