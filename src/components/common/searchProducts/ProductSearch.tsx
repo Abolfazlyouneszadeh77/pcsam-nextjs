@@ -27,7 +27,7 @@ const ProductSearch = () => {
           className="p-1.5 rounded-lg hover:shadow-[0px_2px_5px_0_rgba(0,0,0,0.2)] dark:hover:bg-gray-800 transition-all ease-in-out duration-200"
           onClick={() => setSearchIsOpen(true)}
         >
-          <FiSearch className="text-gray-700" size={25} />
+          <FiSearch className="text-gray-700 size-10 lg:size-7" size={25} />
         </div>
       ) : (
         <div className="relative">

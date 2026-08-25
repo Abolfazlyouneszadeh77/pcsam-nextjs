@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
+import ThemeToggle from "../theme-toggle/ThemeToggle";
 
 const navBarData = [
   { title: "خانه", path: "/" },
   { title: "محصولات", path: "/products" },
+  { title: "سبد خرید", path: "/basket" },
+  { title: "حساب کاربری", path: "/profile" },
   { title: "درباره ما", path: "/about" },
   { title: "تماس با ما", path: "/contact" },
 ];
@@ -22,7 +25,7 @@ const VerticalNavbar = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="text-gray-700 dark:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
       >
-        {isOpen ? <FiX size={22} /> : <FiMenu size={38} />}
+        {isOpen ? <FiX size={22} /> : <FiMenu size={50} />}
       </button>
 
       {/* بک‌دراپ (پشت مودال منو) */}
@@ -35,7 +38,7 @@ const VerticalNavbar = () => {
 
       {/* منوی عمودی */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-900 shadow-xl z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-900 shadow-xl z-250 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -44,6 +47,7 @@ const VerticalNavbar = () => {
           <span className="font-bold text-lg text-blue-600 dark:text-blue-400">
             منو
           </span>
+          <ThemeToggle />
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
