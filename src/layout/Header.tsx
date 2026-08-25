@@ -8,7 +8,7 @@ import ProductSearch from "../components/common/searchProducts/ProductSearch";
 
 const Header = () => {
   return (
-    <div className="w-full bg-white dark:bg-gray-900">
+    <div className="w-full bg-white dark:bg-gray-900 mb-5">
       <div
         className="relative h-15 md:h-18 flex items-center justify-between px-4 sm:px-6 lg:px-8 w-full 
         max-w-7xl mx-auto border-b border-gray-300"

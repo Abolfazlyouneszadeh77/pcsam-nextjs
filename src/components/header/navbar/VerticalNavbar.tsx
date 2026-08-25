@@ -16,13 +16,13 @@ const VerticalNavbar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="md:hidden relative">
+    <div className="relative">
       {/* دکمه منو */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="text-gray-700 dark:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
       >
-        {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+        {isOpen ? <FiX size={22} /> : <FiMenu size={38} />}
       </button>
 
       {/* بک‌دراپ (پشت مودال منو) */}
