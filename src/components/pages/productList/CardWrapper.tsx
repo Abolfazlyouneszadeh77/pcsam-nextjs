@@ -13,6 +13,7 @@ import ProductTabs from "./ProductTabs";
 import { Product } from "@/src/core/constants/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import CardSkeleton from "../../common/skeleton/CardSkeleton";
+import SideFilters from "./SideFilters";
 
 const ITEMS_PER_PAGE = 16;
 
@@ -24,6 +25,14 @@ const CardWrapper = () => {
   const [isViewOne, setIsViewOne] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [active, setActive] = useState(0);
+
+  const [sidebarFiltered, setSidebarFiltered] = useState<Product[]>([]);
+  // همگام‌سازی استیت با دیتای اولیه استور وقتی لود می‌شود
+  useEffect(() => {
+    if (productsList?.length > 0) {
+      setSidebarFiltered(productsList);
+    }
+  }, [productsList]);
 
   useEffect(() => {
     const tab = searchParams.get("tab");
@@ -44,7 +53,7 @@ const CardWrapper = () => {
   }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
-    let result: Product[] = [...productsList];
+    let result: Product[] = sidebarFiltered.length > 0 ? [...sidebarFiltered] : [...productsList];
 
     switch (active) {
       case 1:
@@ -65,7 +74,7 @@ const CardWrapper = () => {
         break;
     }
     return result;
-  }, [productsList, active]);
+  }, [productsList, sidebarFiltered, active]);
 
   const handleChangeTab = (id: number) => {
     setActive(id);
@@ -94,60 +103,72 @@ const CardWrapper = () => {
     }
   };
 
+  const handleFilterChange = (filteredList: Product[]) => {
+    setSidebarFiltered(filteredList);
+    setCurrentPage(1); // با هر فیلتر جدید به صفحه اول برمی‌گردیم
+  };
+
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentItems = filteredProducts.slice(startIndex, endIndex);
 
   return (
-    <>
-      <div className="w-full flex justify-between border-b border-gray-300 pb-2 px-10">
-        <div className="flex gap-3">
-          <button onClick={() => setIsViewOne(true)}>
-            {isViewOne ? (
-              <Image src={gridBlue} alt="" className="w-7 h-7" />
-            ) : (
-              <Image src={grid} alt="" className="w-5 h-5" />
-            )}
-          </button>
-          <button onClick={() => setIsViewOne(false)}>
-            {isViewOne ? (
-              <Image src={layout} alt="" className="w-6 h-6" />
-            ) : (
-              <Image src={layoutBlue} alt="" className="w-7 h-7" />
-            )}
-          </button>
+    <div className="w-full flex gap-5">
+      <SideFilters
+        products={productsList}
+        onFilterChange={handleFilterChange}
+      />
+      <div className="w-full gap-5">
+        <div className=" flex justify-between border-b border-gray-200 pb-2 px-10">
+          <div className="flex gap-3">
+            <button onClick={() => setIsViewOne(true)}>
+              {isViewOne ? (
+                <Image src={gridBlue} alt="view1Icon" className="w-7 h-7" />
+              ) : (
+                <Image src={grid} alt="view2Icon" className="w-5 h-5" />
+              )}
+            </button>
+            <button onClick={() => setIsViewOne(false)}>
+              {isViewOne ? (
+                <Image src={layout} alt="" className="w-6 h-6" />
+              ) : (
+                <Image src={layoutBlue} alt="" className="w-7 h-7" />
+              )}
+            </button>
+          </div>
+          <ProductTabs active={active} setActive={handleChangeTab} />
         </div>
-        <ProductTabs active={active} setActive={handleChangeTab} />
-      </div>
-      <div className="w-full flex flex-col items-center">
-        <div
-          className={`w-full p-5 ${
-            isViewOne
-              ? "grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-6"
-              : "flex flex-col gap-3"
-          }`}
-        >
-          {isLoading
-            ? Array.from({ length: 8 }).map((_, i) => (
-                <CardSkeleton key={i} />
-              ))
-            : currentItems.map((item) => (
-                <div key={item.id}>
-                  {isViewOne ? (
-                    <ViewOne product={item} />
-                  ) : (
-                    <ViewTwo product={item} />
-                  )}
-                </div>
-              ))}
+
+        <div className="w-full flex flex-col items-center">
+          <div
+            className={`w-full p-5 ${
+              isViewOne
+                ? "grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-6"
+                : "flex flex-col gap-3"
+            }`}
+          >
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, i) => (
+                  <CardSkeleton key={i} />
+                ))
+              : currentItems.map((item) => (
+                  <div key={item.id}>
+                    {isViewOne ? (
+                      <ViewOne product={item} />
+                    ) : (
+                      <ViewTwo product={item} />
+                    )}
+                  </div>
+                ))}
+          </div>
+          <Pagination
+            products={filteredProducts}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
-        <Pagination
-          products={filteredProducts}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
       </div>
-    </>
+    </div>
   );
 };
 

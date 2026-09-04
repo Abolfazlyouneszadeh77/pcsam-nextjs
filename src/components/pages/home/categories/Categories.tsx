@@ -16,7 +16,7 @@ const categories = [
 const Categories = () => {
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-15 border-b border-gray-300 px-4 py-5 mb-5">
+      <div className="flex flex-wrap justify-center gap-15  px-4 py-5 mb-5">
         {categories.map((item, index) => (
           <div key={index} className="p-2 text-center">
             <Link

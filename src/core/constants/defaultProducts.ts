@@ -1,21 +1,27 @@
 import { Product } from "./types";
+import pic1 from '@/public/products/laptop/zbook-G8/20260827_123800.jpg'
+import pic2 from '@/public/products/laptop/zbook-G8/20260827_123456.jpg'
+import pic3 from '@/public/products/laptop/zbook-G8/20260827_123540.jpg'
+import pic4 from '@/public/products/laptop/zbook-G8/20260827_123606.jpg'
 
 export const defaultProducts: Product[] = [
   {
     id: 1,
-    title: "لپتاپ ایسوس",
-    price: 250000,
+    title: "Dell Percision 7520",
+    price: 95000000,
     discount: 10,
     viewCount: 452,
     date: "2025-02-10",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 2,
-    title: "محصول 2",
-    price: 180000,
+    title: "Dell Percision 7520",
+    price: 95000000,
     discount: 0,
     viewCount: 123,
     date: "2025-02-12",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 3,
@@ -24,6 +30,7 @@ export const defaultProducts: Product[] = [
     discount: 15,
     viewCount: 891,
     date: "2025-02-05",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 4,
@@ -32,6 +39,7 @@ export const defaultProducts: Product[] = [
     discount: 0,
     viewCount: 34,
     date: "2025-02-14",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 5,
@@ -40,6 +48,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 567,
     date: "2025-02-07",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 6,
@@ -48,6 +57,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 210,
     date: "2025-02-09",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 7,
@@ -56,6 +66,7 @@ export const defaultProducts: Product[] = [
     discount: 0,
     viewCount: 77,
     date: "2025-02-11",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 8,
@@ -64,6 +75,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 943,
     date: "2025-02-01",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 9,
@@ -72,6 +84,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 682,
     date: "2025-02-13",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 10,
@@ -80,6 +93,7 @@ export const defaultProducts: Product[] = [
     discount: 0,
     viewCount: 356,
     date: "2025-02-08",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 11,
@@ -88,6 +102,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 99,
     date: "2025-02-06",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 12,
@@ -96,6 +111,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 444,
     date: "2025-02-04",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 13,
@@ -104,6 +120,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 511,
     date: "2025-02-03",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 14,
@@ -112,6 +129,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 788,
     date: "2025-02-02",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 15,
@@ -120,6 +138,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 267,
     date: "2025-02-15",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 16,
@@ -128,6 +147,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 600,
     date: "2025-02-16",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 17,
@@ -136,6 +156,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 120,
     date: "2025-02-17",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 18,
@@ -144,6 +165,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 399,
     date: "2025-02-18",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 19,
@@ -152,6 +174,7 @@ export const defaultProducts: Product[] = [
     discount: 8,
     viewCount: 721,
     date: "2025-02-19",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 20,
@@ -159,6 +182,7 @@ export const defaultProducts: Product[] = [
     price: 275000,
     viewCount: 188,
     date: "2025-02-20",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 21,
@@ -167,6 +191,7 @@ export const defaultProducts: Product[] = [
     discount: 12,
     viewCount: 834,
     date: "2025-02-21",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 22,
@@ -175,6 +200,7 @@ export const defaultProducts: Product[] = [
     discount: 7,
     viewCount: 64,
     date: "2025-02-22",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 23,
@@ -182,6 +208,7 @@ export const defaultProducts: Product[] = [
     price: 198000,
     viewCount: 305,
     date: "2025-02-23",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 24,
@@ -190,6 +217,7 @@ export const defaultProducts: Product[] = [
     discount: 20,
     viewCount: 940,
     date: "2025-02-24",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 25,
@@ -198,6 +226,7 @@ export const defaultProducts: Product[] = [
     discount: 3,
     viewCount: 142,
     date: "2025-02-25",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 26,
@@ -205,6 +234,7 @@ export const defaultProducts: Product[] = [
     price: 625000,
     viewCount: 711,
     date: "2025-02-26",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 27,
@@ -213,6 +243,7 @@ export const defaultProducts: Product[] = [
     discount: 18,
     viewCount: 533,
     date: "2025-02-27",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 28,
@@ -221,6 +252,7 @@ export const defaultProducts: Product[] = [
     discount: 6,
     viewCount: 276,
     date: "2025-02-28",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 29,
@@ -228,6 +260,7 @@ export const defaultProducts: Product[] = [
     price: 390000,
     viewCount: 815,
     date: "2025-03-01",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 30,
@@ -236,6 +269,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 98,
     date: "2025-03-02",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 31,
@@ -244,6 +278,7 @@ export const defaultProducts: Product[] = [
     discount: 11,
     viewCount: 427,
     date: "2025-03-03",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 32,
@@ -252,6 +287,7 @@ export const defaultProducts: Product[] = [
     discount: 25,
     viewCount: 1002,
     date: "2025-03-04",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 33,
@@ -259,6 +295,7 @@ export const defaultProducts: Product[] = [
     price: 145000,
     viewCount: 59,
     date: "2025-03-05",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 34,
@@ -267,6 +304,7 @@ export const defaultProducts: Product[] = [
     discount: 4,
     viewCount: 366,
     date: "2025-03-06",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 35,
@@ -275,6 +313,7 @@ export const defaultProducts: Product[] = [
     discount: 30,
     viewCount: 1275,
     date: "2025-03-07",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 36,
@@ -282,6 +321,7 @@ export const defaultProducts: Product[] = [
     price: 430000,
     viewCount: 244,
     date: "2025-03-08",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 37,
@@ -290,6 +330,7 @@ export const defaultProducts: Product[] = [
     discount: 9,
     viewCount: 682,
     date: "2025-03-09",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 38,
@@ -298,6 +339,7 @@ export const defaultProducts: Product[] = [
     discount: 2,
     viewCount: 171,
     date: "2025-03-10",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 39,
@@ -306,6 +348,7 @@ export const defaultProducts: Product[] = [
     discount: 16,
     viewCount: 958,
     date: "2025-03-11",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 40,
@@ -313,6 +356,7 @@ export const defaultProducts: Product[] = [
     price: 245000,
     viewCount: 321,
     date: "2025-03-12",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 41,
@@ -321,6 +365,7 @@ export const defaultProducts: Product[] = [
     discount: 13,
     viewCount: 707,
     date: "2025-03-13",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 42,
@@ -329,6 +374,7 @@ export const defaultProducts: Product[] = [
     discount: 22,
     viewCount: 889,
     date: "2025-03-14",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 43,
@@ -336,6 +382,7 @@ export const defaultProducts: Product[] = [
     price: 125000,
     viewCount: 48,
     date: "2025-03-15",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 44,
@@ -344,6 +391,7 @@ export const defaultProducts: Product[] = [
     discount: 5,
     viewCount: 391,
     date: "2025-03-16",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 45,
@@ -352,6 +400,7 @@ export const defaultProducts: Product[] = [
     discount: 10,
     viewCount: 566,
     date: "2025-03-17",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 46,
@@ -359,6 +408,7 @@ export const defaultProducts: Product[] = [
     price: 455000,
     viewCount: 203,
     date: "2025-03-18",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 47,
@@ -367,6 +417,7 @@ export const defaultProducts: Product[] = [
     discount: 27,
     viewCount: 1118,
     date: "2025-03-19",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 48,
@@ -375,6 +426,7 @@ export const defaultProducts: Product[] = [
     discount: 6,
     viewCount: 430,
     date: "2025-03-20",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 49,
@@ -383,6 +435,7 @@ export const defaultProducts: Product[] = [
     discount: 19,
     viewCount: 774,
     date: "2025-03-21",
+    picture: [pic1, pic2, pic3, pic4],
   },
   {
     id: 50,
@@ -390,5 +443,6 @@ export const defaultProducts: Product[] = [
     price: 225000,
     viewCount: 152,
     date: "2025-03-22",
+    picture: [pic1, pic2, pic3, pic4],
   },
 ];

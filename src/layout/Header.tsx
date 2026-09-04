@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className="w-full bg-white dark:bg-gray-900">
       <div
-        className="relative h-25 lg:h-15 flex items-center justify-between px-10 lg:px-4 w-full 
+        className="relative h-25 lg:h-18 flex items-center justify-between px-10 lg:px-4 w-full 
         max-w-7xl mx-auto border-b border-gray-300"
       >
         <Navbar />
