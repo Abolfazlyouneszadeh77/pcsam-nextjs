@@ -1,24 +1,25 @@
-'use client'
-import React, { useEffect } from "react";
+// 'use client'
+import React from "react";
 import Image from "next/image";
-import productImage from "@/public/6cfa8dd07fc8d75e165ad8c2618128b545a1b55d_1777363056.webp";
-import { Product } from "@/src/core/constants/types";
+// import productImage from "@/public/6cfa8dd07fc8d75e165ad8c2618128b545a1b55d_1777363056.webp";
+// import { Product } from "@/src/core/constants/types";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import { HiOutlineEye } from "react-icons/hi";
 import { FiCalendar, FiTag } from "react-icons/fi";
+import { Products } from "@/src/core/constants/type";
 interface CardProps {
-  product: Product;
+  product: Products;
 }
 
 const ViewOne = ({ product }: CardProps) => {
 
-  const coverImage = product.picture?.[0];
+  const coverImage = product.pictures?.[0].url ;
 
   return (
     <div className="w-65 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg overflow-hidden hover:shadow-blue-300 transition-shadow duration-200">
       <div className="relative">
-        <Image src={coverImage} alt={product.title} className="rounded-lg" />
+        <Image src={coverImage} alt={product.title} width={200} height={200}  className="w-full rounded-lg" />
         {product.discount ? (
           <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm font-bold pt-2">
             {product.discount}%
@@ -28,12 +29,12 @@ const ViewOne = ({ product }: CardProps) => {
         )}
       </div>
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-white">
+        <h3 className="text-lg font-semibold my-3 text-gray-800 dark:text-white">
           {product.title}
         </h3>
         <div className="text-[14px] text-gray-500 flex items-center gap-3">
           <FiCalendar size={20} />
-          {product.date.toLocaleString()}
+          {product.createdAt}
         </div>
         <div className="text-[14px] text-gray-500 flex gap-2">
           <HiOutlineEye size={22} />

@@ -1,4 +1,5 @@
 'use client'
+import { Products } from '@/src/core/constants/type'
 import { Product } from '@/src/core/constants/types'
 import React, { useState } from 'react'
 import { IoFilter } from 'react-icons/io5'
@@ -11,8 +12,8 @@ interface FilterState {
 }
 
 interface SideFiltersProps {
-  products?: Product[];
-  onFilterChange?: (filteredProducts: Product[]) => void;
+  products?: Products[];
+  onFilterChange?: (filteredProducts: Products[]) => void;
 }
 
 const CATEGORIES = [

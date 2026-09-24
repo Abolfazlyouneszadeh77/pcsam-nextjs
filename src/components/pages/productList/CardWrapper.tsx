@@ -8,31 +8,51 @@ import Image from "next/image";
 import ViewOne from "../../common/card/ViewOne";
 import ViewTwo from "../../common/card/ViewTwo";
 import Pagination from "./Pagination";
-import { useProductStore } from "@/src/store/productStore";
+// import { useProductStore } from "@/src/store/productStore";
 import ProductTabs from "./ProductTabs";
-import { Product } from "@/src/core/constants/types";
+// import { Product } from "@/src/core/constants/types";
+import { Products } from "@/src/core/constants/type";
 import { useRouter, useSearchParams } from "next/navigation";
 import CardSkeleton from "../../common/skeleton/CardSkeleton";
 import SideFilters from "./SideFilters";
+import { getProductsApi } from "@/src/core/services/api/getProductList";
 
 const ITEMS_PER_PAGE = 16;
 
 const CardWrapper = () => {
-  const { productsList, isLoading } = useProductStore();
+  // const { productsList, isLoading } = useProductStore();
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [productData, setproductData] = useState<Products[]>([]);
   const [isViewOne, setIsViewOne] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [active, setActive] = useState(0);
+  const [sidebarFiltered, setSidebarFiltered] = useState<Products[]>([]);
 
-  const [sidebarFiltered, setSidebarFiltered] = useState<Product[]>([]);
+  const fetchProducts = async () => {
+    try {
+      setIsLoading(true);
+      const data = await getProductsApi();
+      setproductData(data);
+      // console.log("products data: ", data);
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+    } finally {
+      // ۲. اضافه کردن finally برای اینکه در هر صورت لودینگ متوقف شود
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   // همگام‌سازی استیت با دیتای اولیه استور وقتی لود می‌شود
   useEffect(() => {
-    if (productsList?.length > 0) {
-      setSidebarFiltered(productsList);
+    if (productData?.length > 0) {
+      setSidebarFiltered(productData);
     }
-  }, [productsList]);
+  }, [productData]);
 
   useEffect(() => {
     const tab = searchParams.get("tab");
@@ -53,7 +73,8 @@ const CardWrapper = () => {
   }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
-    let result: Product[] = sidebarFiltered.length > 0 ? [...sidebarFiltered] : [...productsList];
+    let result: Products[] =
+      sidebarFiltered.length > 0 ? [...sidebarFiltered] : [...productData];
 
     switch (active) {
       case 1:
@@ -66,7 +87,7 @@ const CardWrapper = () => {
         result = result
           .slice()
           .sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
           );
         break;
       case 0:
@@ -74,7 +95,7 @@ const CardWrapper = () => {
         break;
     }
     return result;
-  }, [productsList, sidebarFiltered, active]);
+  }, [productData, sidebarFiltered, active]);
 
   const handleChangeTab = (id: number) => {
     setActive(id);
@@ -103,7 +124,7 @@ const CardWrapper = () => {
     }
   };
 
-  const handleFilterChange = (filteredList: Product[]) => {
+  const handleFilterChange = (filteredList: Products[]) => {
     setSidebarFiltered(filteredList);
     setCurrentPage(1); // با هر فیلتر جدید به صفحه اول برمی‌گردیم
   };
@@ -114,10 +135,7 @@ const CardWrapper = () => {
 
   return (
     <div className="w-full flex gap-5">
-      <SideFilters
-        products={productsList}
-        onFilterChange={handleFilterChange}
-      />
+      <SideFilters products={productData} onFilterChange={handleFilterChange} />
       <div className="w-full gap-5">
         <div className=" flex justify-between border-b border-gray-200 pb-2 px-10">
           <div className="flex gap-3">
