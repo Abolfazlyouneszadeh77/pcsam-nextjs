@@ -21,7 +21,7 @@ export default function Home() {
       </div>
       <Categories />
       <div className="max-w-340 mx-auto px-10">
-        <MiniSlider
+        {/* <MiniSlider
           title="محصولات تخفیف دار"
           tab={"discount"}
           products={saledProducts}
@@ -35,7 +35,7 @@ export default function Home() {
           title="محصولات پربازدید"
           tab={"popular"}
           products={mostViewedProducts}
-        />
+        /> */}
       </div>
       <ScrollToTop />
     </div>

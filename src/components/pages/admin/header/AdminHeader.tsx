@@ -29,17 +29,8 @@ const AdminHeader = ({
         </div>
       </div>
 
-      {/* سمت چپ: دکمه افزودن، نوتیفیکیشن و پروفایل */}
+      {/* سمت چپ: دکمه نوتیفیکیشن و پروفایل */}
       <div className="flex items-center gap-4">
-        {/* دکمه اکشن سریع برای رفتن به صفحه افزودن محصول */}
-        <Link
-          href="/admin/products/new"
-          className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-600/20 active:scale-95"
-        >
-          <Plus className="w-4 h-4" />
-          <span>محصول جدید</span>
-        </Link>
-
         {/* دکمه زنگوله اعلان‌ها */}
         <button
           className="relative p-2.5 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"

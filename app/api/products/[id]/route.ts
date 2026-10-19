@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { del } from '@vercel/blob';
 
 interface RouteContext {
   params: Promise<{
@@ -42,12 +43,10 @@ export async function GET(request: Request, { params }: RouteContext) {
       );
     }
 
-    // اصلاح شده:
     return NextResponse.json({
       success: true,
       data: product,
     });
-    
   } catch (error) {
     console.error('GET Product Error:', error);
     return NextResponse.json(
@@ -70,15 +69,50 @@ export async function PUT(request: Request, { params }: RouteContext) {
     }
 
     const body = await request.json();
-    const { title, slug, price, discount, stock, description, categoryId, brandId, pictures, specs } = body;
+    const {
+      title,
+      slug,
+      price,
+      discount,
+      stock,
+      description,
+      categoryId,
+      brandId,
+      pictures,
+      specs,
+    } = body;
 
-    const existingProduct = await prisma.product.findUnique({ where: { id } });
+    // پیدا کردن محصول و عکس‌های قبلی آن
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
+      include: { pictures: true },
+    });
 
     if (!existingProduct) {
       return NextResponse.json(
         { success: false, error: 'محصولی برای ویرایش پیدا نشد' },
         { status: 404 }
       );
+    }
+
+    // بررسی عکس‌هایی که در ویرایش جدید حذف یا تعویض شده‌اند
+    const nextPictureUrls = Array.isArray(pictures)
+      ? pictures.map((p: { url: string }) => p.url).filter(Boolean)
+      : [];
+
+    const oldBlobUrlsToDelete = (existingProduct.pictures || [])
+      .map((p) => p.url)
+      .filter(
+        (url) =>
+          url.includes('public.blob.vercel-storage.com') &&
+          !nextPictureUrls.includes(url)
+      );
+
+    // حذف عکس‌های کنار گذاشته شده از ورسل بلاب
+    if (oldBlobUrlsToDelete.length > 0) {
+      await del(oldBlobUrlsToDelete, {
+        token: process.env.BLOB_READ_WRITE_TOKEN,
+      });
     }
 
     const updatedProduct = await prisma.product.update({
@@ -93,8 +127,14 @@ export async function PUT(request: Request, { params }: RouteContext) {
         description,
         categoryId: Number(categoryId),
         brandId: brandId ? Number(brandId) : null,
-        pictures: { deleteMany: {}, create: Array.isArray(pictures) ? pictures : [] },
-        specs: { deleteMany: {}, create: Array.isArray(specs) ? specs : [] },
+        pictures: {
+          deleteMany: {},
+          create: Array.isArray(pictures) ? pictures : [],
+        },
+        specs: {
+          deleteMany: {},
+          create: Array.isArray(specs) ? specs : [],
+        },
       },
       include: { category: true, brand: true, pictures: true, specs: true },
     });
@@ -113,7 +153,7 @@ export async function PUT(request: Request, { params }: RouteContext) {
   }
 }
 
-// 3. DELETE - حذف محصول
+// 3. DELETE - حذف محصول همراه با پاکسازی عکس‌ها از Vercel Blob
 export async function DELETE(request: Request, { params }: RouteContext) {
   try {
     const { idParam, id } = await getProductId(params);
@@ -125,7 +165,11 @@ export async function DELETE(request: Request, { params }: RouteContext) {
       );
     }
 
-    const existingProduct = await prisma.product.findUnique({ where: { id } });
+    // ۱. استعلام محصول و لیست تصاویر مربوط به آن
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
+      include: { pictures: true },
+    });
 
     if (!existingProduct) {
       return NextResponse.json(
@@ -134,11 +178,26 @@ export async function DELETE(request: Request, { params }: RouteContext) {
       );
     }
 
-    await prisma.product.delete({ where: { id } });
+    // ۲. فیلتر کردن عکس‌هایی که روی Vercel Blob قرار دارند
+    const blobUrlsToDelete = (existingProduct.pictures || [])
+      .map((p) => p.url)
+      .filter((url) => url.includes('public.blob.vercel-storage.com'));
+
+    // ۳. حذف فایل‌ها از استوریج ورسل
+    if (blobUrlsToDelete.length > 0) {
+      await del(blobUrlsToDelete, {
+        token: process.env.BLOB_READ_WRITE_TOKEN,
+      });
+    }
+
+    // ۴. حذف رکورد از دیتابیس
+    await prisma.product.delete({
+      where: { id },
+    });
 
     return NextResponse.json({
       success: true,
-      message: 'محصول با موفقیت حذف شد',
+      message: 'محصول و تصاویر آن با موفقیت حذف شدند',
     });
   } catch (error) {
     console.error('DELETE Product Error:', error);

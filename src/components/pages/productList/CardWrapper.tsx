@@ -1,4 +1,5 @@
 "use client";
+
 import grid from "@/public/list-size-icons/grid-view-stroke-rounded 1.svg";
 import gridBlue from "@/public/list-size-icons/grid-view-stroke-blue-rounded 1.svg";
 import layout from "@/public/list-size-icons/layout-3-row-stroke-rounded 1.svg";
@@ -8,52 +9,35 @@ import Image from "next/image";
 import ViewOne from "../../common/card/ViewOne";
 import ViewTwo from "../../common/card/ViewTwo";
 import Pagination from "./Pagination";
-// import { useProductStore } from "@/src/store/productStore";
 import ProductTabs from "./ProductTabs";
-// import { Product } from "@/src/core/constants/types";
 import { Products } from "@/src/core/constants/type";
 import { useRouter, useSearchParams } from "next/navigation";
 import CardSkeleton from "../../common/skeleton/CardSkeleton";
 import SideFilters from "./SideFilters";
-import { getProductsApi } from "@/src/core/services/api/getProductList";
+import { useGetProducts } from "@/src/core/hooks/useProducts";
 
 const ITEMS_PER_PAGE = 16;
 
 const CardWrapper = () => {
-  // const { productsList, isLoading } = useProductStore();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [productData, setproductData] = useState<Products[]>([]);
+
+  // ۱. دریافت دیتا و وضعیت لودینگ مستقیماً از React Query
+  const { data: productData = [], isLoading } = useGetProducts();
+
   const [isViewOne, setIsViewOne] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [active, setActive] = useState(0);
   const [sidebarFiltered, setSidebarFiltered] = useState<Products[]>([]);
 
-  const fetchProducts = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getProductsApi();
-      setproductData(data);
-      // console.log("products data: ", data);
-    } catch (err) {
-      console.error("Failed to fetch products:", err);
-    } finally {
-      // ۲. اضافه کردن finally برای اینکه در هر صورت لودینگ متوقف شود
-      setIsLoading(false);
-    }
-  };
+  // همگام‌سازی فیلتر سایدبار با دریافت دیتای محصولات
   useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  // همگام‌سازی استیت با دیتای اولیه استور وقتی لود می‌شود
-  useEffect(() => {
-    if (productData?.length > 0) {
+    if (productData.length > 0) {
       setSidebarFiltered(productData);
     }
   }, [productData]);
 
+  // تب فعال بر اساس کوئری پارامتر URL
   useEffect(() => {
     const tab = searchParams.get("tab");
 
@@ -72,6 +56,7 @@ const CardWrapper = () => {
     }
   }, [searchParams]);
 
+  // اعمال مرتب‌سازی و فیلتر روی دیتا
   const filteredProducts = useMemo(() => {
     let result: Products[] =
       sidebarFiltered.length > 0 ? [...sidebarFiltered] : [...productData];
@@ -81,13 +66,14 @@ const CardWrapper = () => {
         result = result.filter((p) => !!p.discount && p.discount > 0);
         break;
       case 2:
-        result = result.slice().sort((a, b) => b.viewCount - a.viewCount);
+        result = result.slice().sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0));
         break;
       case 3:
         result = result
           .slice()
           .sort(
-            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
         break;
       case 0:
@@ -102,7 +88,6 @@ const CardWrapper = () => {
     setCurrentPage(1);
 
     let tab = "";
-
     switch (id) {
       case 1:
         tab = "discount";
@@ -126,7 +111,7 @@ const CardWrapper = () => {
 
   const handleFilterChange = (filteredList: Products[]) => {
     setSidebarFiltered(filteredList);
-    setCurrentPage(1); // با هر فیلتر جدید به صفحه اول برمی‌گردیم
+    setCurrentPage(1);
   };
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -137,7 +122,7 @@ const CardWrapper = () => {
     <div className="w-full flex gap-5">
       <SideFilters products={productData} onFilterChange={handleFilterChange} />
       <div className="w-full gap-5">
-        <div className=" flex justify-between border-b border-gray-200 pb-2 px-10">
+        <div className="flex justify-between border-b border-gray-200 pb-2 px-10">
           <div className="flex gap-3">
             <button onClick={() => setIsViewOne(true)}>
               {isViewOne ? (

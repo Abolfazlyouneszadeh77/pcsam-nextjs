@@ -36,10 +36,10 @@ const ViewOne = ({ product }: CardProps) => {
           <FiCalendar size={20} />
           {product.createdAt}
         </div>
-        <div className="text-[14px] text-gray-500 flex gap-2">
+        {/* <div className="text-[14px] text-gray-500 flex gap-2">
           <HiOutlineEye size={22} />
           {product.viewCount.toLocaleString()}
-        </div>
+        </div> */}
         <div className="flex items-center gap-2">
           <FiTag size={20} className="text-gray-500" />
           <div className="flex items-center">

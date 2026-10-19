@@ -12,6 +12,9 @@
     "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.104.4",
+    "@tanstack/react-query-devtools": "^5.104.4",
+    "@vercel/blob": "^2.8.0",
     "axios": "^1.20.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.45.0",
